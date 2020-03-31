@@ -1,3 +1,3 @@
-# Aula input file professor Burnes - Período em quarentena
+# Aula professor Burnes - Período em quarentena
 
-_Como enviar arquivos para o servidor usando o input file_
+### Como enviar arquivos para o servidor usando o input file

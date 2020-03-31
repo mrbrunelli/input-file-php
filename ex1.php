@@ -8,11 +8,16 @@ if (empty($descricao)) {
 }
 
 // print_r($_FILES);
+$arquivo = time();
+
+$tipo = pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION);
+
+$arquivo = $arquivo . "." . $tipo;
 
 if ($_FILES['arquivo']['type'] != 'image/jpeg') {
     echo '<script>alert("Não é um arquivo JPG válido");history.back();</script>';
     exit;
-} else if (!move_uploaded_file($_FILES['arquivo']['tmp_name'], 'arquivos/' . $_FILES['arquivo']['name'])) {
+} else if (!move_uploaded_file($_FILES['arquivo']['tmp_name'], 'arquivos/' . $arquivo)) {
     echo '<script>alert("Erro, não foi possível copiar!");history.back();</script>';
     exit;
 }

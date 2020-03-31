@@ -22,5 +22,9 @@ if ($_FILES['arquivo']['type'] != 'image/jpeg') {
     exit;
 }
 
+include "imagem.php";
+
+LoadImg("arquivos/" . $arquivo, $arquivo, "arquivos/");
+
 echo '<script>alert("Arquivo enviado!");history.back();</script>';
 exit;

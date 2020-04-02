@@ -1,16 +1,6 @@
 <?php
 
-$servidor = 'localhost';
-$banco = 'upload';
-$usuario = 'root';
-$senha = '';
-
-try {
-    $pdo = new PDO("mysql:host=$servidor;dbname=$banco;charset=utf8", $usuario, $senha);
-} catch (PDOException $e) {
-    echo 'Erro de conexão ' . $e->getMessage();
-    exit;
-}
+include 'conexao.php';
 
 // Null coalesce, caso não exista a primeira condição, a variável recebera vázio.
 $descricao = $_POST['descricao'] ?? "";
@@ -23,7 +13,7 @@ if (empty($descricao)) {
 // print_r($_FILES);
 $arquivo = time();
 
-$tipo = pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION);
+//$tipo = pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION);
 
 //$arquivo = $arquivo . "." . $tipo;
 

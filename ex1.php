@@ -1,5 +1,18 @@
 <?php
 
+$servidor = 'localhost';
+$banco = 'upload';
+$usuario = 'root';
+$senha = '';
+
+try {
+    $pdo = new PDO("mysql:host=$servidor;dbname=$banco;charset=utf8", $usuario, $senha);
+} catch (PDOException $e) {
+    echo 'Erro de conexão ' . $e->getMessage();
+    exit;
+}
+
+// Null coalesce, caso não exista a primeira condição, a variável recebera vázio.
 $descricao = $_POST['descricao'] ?? "";
 
 if (empty($descricao)) {
@@ -25,6 +38,19 @@ if ($_FILES['arquivo']['type'] != 'image/jpeg') {
 include "imagem.php";
 
 LoadImg("arquivos/" . $_FILES['arquivo']['name'], $arquivo, "arquivos/");
+
+$sql = "insert into arquivos (descricao, arquivo) values (?, ?)";
+
+$consulta = $pdo->prepare($sql);
+
+$consulta->bindParam(1, $descricao);
+
+$consulta->bindParam(2, $arquivo);
+
+if (!$consulta->execute()) {
+    echo '<script>alert("Não foi possível gravar!");history.back();</script>';
+    exit;
+}
 
 echo '<script>alert("Arquivo enviado!");history.back();</script>';
 exit;
